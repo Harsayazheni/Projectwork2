@@ -37,25 +37,38 @@ Additional Dependencies: scikit-learn, TensorFlow, NumPy, Pandas, NLTK/spaCy, an
 <img width="1919" height="943" alt="image" src="https://github.com/user-attachments/assets/cb4b81f3-dced-4747-b47c-bd41f0e73c21" />
 
 #### Prediction Module
+<img width="1919" height="934" alt="image" src="https://github.com/user-attachments/assets/9f18821c-4c32-4e70-ae32-040080176e7c" />
 
 
-#### Output2 - Name of the output
-![Screenshot 2023-11-25 134253](https://github.com/<<yourusername>>/Hand-Gesture-Recognition-System/assets/75235455/5e05c981-05ca-4aaa-aea2-d918dcf25cb7)
+#### Visualization Module
+<img width="1919" height="938" alt="image" src="https://github.com/user-attachments/assets/d6622da7-59eb-4f36-bc93-cac2f9bcf52a" />
 
-Detection Accuracy: 96.7%
-Note: These metrics can be customized based on your actual performance evaluations.
+#### Chatbot Module
+<img width="1919" height="942" alt="image" src="https://github.com/user-attachments/assets/30326c72-cc2c-4e61-b53a-f461bd84297d" />
 
+#### AI Resume Matcher Module
+<img width="1919" height="934" alt="image" src="https://github.com/user-attachments/assets/6fb3c278-af24-4761-842b-94569b3d9112" />
+
+#### Fake Job Detection Module
+<img width="1918" height="933" alt="image" src="https://github.com/user-attachments/assets/685597fe-ebb6-490f-819e-769a9ac20ccc" />
+
+
+#### Career Roadmap Generator Module
+<img width="1919" height="941" alt="image" src="https://github.com/user-attachments/assets/9960a1f9-468d-4ae7-be0c-c831f719d013" />
 
 ## Results and Impact
-<!--Give the results and impact as shown below-->
-The Sign Language Detection System enhances accessibility for individuals with hearing and speech impairments, providing a valuable tool for inclusive communication. The project's integration of computer vision and deep learning showcases its potential for intuitive and interactive human-computer interaction.
+OPUS enhances structured career decision-making by integrating intelligent prediction, ethical AI principles, and fraud detection into a single unified platform. The system improves employability, reduces exposure to fraudulent opportunities, and provides personalized career roadmaps tailored to industry trends.
 
-This project serves as a foundation for future developments in assistive technologies and contributes to creating a more inclusive and accessible digital environment.
+By combining machine learning and responsible AI, OPUS contributes to building a safer and more transparent digital career ecosystem.
+
+This project serves as a foundation for future advancements in AI-driven career intelligence systems.
 
 ## Articles published / References
-1. N. S. Gupta, S. K. Rout, S. Barik, R. R. Kalangi, and B. Swampa, “Enhancing Heart Disease Prediction Accuracy Through Hybrid Machine Learning Methods ”, EAI Endorsed Trans IoT, vol. 10, Mar. 2024.
-2. A. A. BIN ZAINUDDIN, “Enhancing IoT Security: A Synergy of Machine Learning, Artificial Intelligence, and Blockchain”, Data Science Insights, vol. 2, no. 1, Feb. 2024.
+1.J. Leskovec, A. Rajaraman, and J. Ullman, “Mining of Massive Datasets”, Cambridge University Press.
 
+2.C. D. Manning, P. Raghavan, and H. Schütze, “Introduction to Information Retrieval”, Cambridge University Press.
+
+3.Research studies on NLP-based classification, TF-IDF similarity models, and fraud detection systems.
 
 
 

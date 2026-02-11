@@ -1,0 +1,16 @@
+# Core Flask
+Flask==3.0.0
+Werkzeug==3.0.1
+
+# Machine Learning
+numpy==1.26.2
+scikit-learn==1.3.2
+pandas==2.1.4
+
+# Groq AI API (NEW - Fast and generous free tier)
+groq==1.0.0
+python-dotenv==1.0.0
+
+# Optional but useful
+flask-cors==4.0.0
+gunicorn==21.2.0

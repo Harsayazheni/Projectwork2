@@ -1,0 +1,244 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<style>
+/* ===== Page Wrapper ===== */
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 30px 20px;
+}
+
+/* ===== Headings ===== */
+h2 {
+    text-align: center;
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+}
+
+h3 {
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+/* ===== Error Message ===== */
+p b {
+    display: block;
+    text-align: center;
+    color: #dc2626;
+    font-size: 1.1rem;
+}
+
+/* ===== PDF Content ===== */
+#pdf-content {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 18px;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08);
+    margin-bottom: 30px;
+}
+
+/* ===== Legend Text ===== */
+#pdf-content > p {
+    text-align: center;
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+}
+
+/* ===== Chart Wrapper ===== */
+.chart-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 25px 0;
+}
+#pdf-content {
+    background: white !important;
+}
+
+canvas {
+    width: 100% !important;
+    height: auto !important;
+}
+
+
+/* ===== Skill Gap List ===== */
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+ul li {
+    background: #f8f9fa;
+    margin-bottom: 10px;
+    padding: 12px 16px;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+/* ===== Action Buttons ===== */
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+/* ===== Buttons ===== */
+.export-btn,
+.chatbot-btn {
+    padding: 12px 22px;
+    border-radius: 30px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+/* Export Button */
+.export-btn {
+    background: linear-gradient(135deg, #2563eb, #4f83ff);
+    color: white;
+    border: none;
+}
+
+.export-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(37, 99, 235, 0.35);
+}
+
+/* Chatbot Button */
+.chatbot-btn {
+    background: transparent;
+    border: 2px solid #16a34a;
+    color: #16a34a;
+}
+
+.chatbot-btn:hover {
+    background: #16a34a;
+    color: white;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+    canvas {
+        max-width: 100% !important;
+        max-height: 100% !important;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+    }
+}
+</style>
+
+<div class="container">
+
+<h2>📊 Skill Comparison</h2>
+
+{% if error %}
+    <p><b>Please complete career prediction first.</b></p>
+
+{% else %}
+
+<div id="pdf-content">
+
+    <p><b>Blue:</b> Your Skills &nbsp;&nbsp; <b>Green:</b> Ideal Skills</p>
+
+    <div class="chart-wrapper">
+        <canvas id="skillRadar"></canvas>
+    </div>
+
+    <h3>📌 Skill Gap Summary</h3>
+    <ul>
+    {% for skill, val in skills.items() %}
+        {% if val < ideal[skill] %}
+            <li>Improve <b>{{ skill.replace("_"," ") }}</b> by {{ ideal[skill] - val }}</li>
+        {% else %}
+            <li><b>{{ skill.replace("_"," ") }}</b> meets requirement</li>
+        {% endif %}
+    {% endfor %}
+    </ul>
+
+</div>
+
+<div class="action-buttons">
+    <button class="export-btn" onclick="exportPDF()">Export PDF 📄</button>
+    <a href="/chatbot">
+        <button class="chatbot-btn">💬 Chat with AI Career Assistant</button>
+    </a>
+</div>
+
+{% endif %}
+
+</div>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+{% if not error %}
+<script>
+var skillsData = {{ skills | tojson | safe }};
+var idealData = {{ ideal | tojson | safe }};
+
+new Chart(document.getElementById("skillRadar"), {
+    type: "radar",
+    data: {
+        labels: Object.keys(skillsData),
+        datasets: [
+            {
+                label: "Your Skills",
+                data: Object.values(skillsData),
+                backgroundColor: "rgba(37,99,235,0.3)",
+                borderColor: "#2563eb",
+                borderWidth: 2
+            },
+            {
+                label: "Ideal Skills",
+                data: Object.values(idealData),
+                backgroundColor: "rgba(22,163,74,0.3)",
+                borderColor: "#16a34a",
+                borderWidth: 2
+            }
+        ]
+    },
+    options: {
+        responsive: true,
+        scales: {
+            r: {
+                min: 0,
+                max: 10,
+                ticks: { stepSize: 2 }
+            }
+        }
+    }
+});
+
+function exportPDF() {
+    const element = document.getElementById("pdf-content");
+
+    // 🔥 Give Chart.js time to render
+    setTimeout(() => {
+        html2pdf().set({
+            margin: 0.5,
+            filename: "OPUS_Skill_Report.pdf",
+            html2canvas: {
+                scale: 3,
+                useCORS: true,
+                scrollY: 0
+            },
+            jsPDF: {
+                unit: "in",
+                format: "a4",
+                orientation: "portrait"
+            }
+        }).from(element).save();
+    }, 500); // ⏳ IMPORTANT DELAY
+}
+</script>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,212 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<style>
+    /* ===== FULL WIDTH HOME OVERRIDE ===== */
+    .container {
+        max-width: 100%;
+        padding: 0;
+        background: transparent;
+        box-shadow: none;
+        margin-top: 0; /* 🔥 remove extra gap */
+    }
+
+    /* ===== OPUS HOME PAGE ===== */
+    .opus-home {
+        width: 100%;
+        padding: 40px 6vw 90px;  /* 🔥 reduced top padding */
+        text-align: center;
+    }
+
+    /* MAIN TITLE */
+    .opus-home h1 {
+        font-size: 48px;
+        font-weight: 800;
+        color: #0f172a;
+        margin-top: 0;          /* 🔥 remove default margin */
+        margin-bottom: 22px;
+        line-height: 1.25;
+    }
+
+    /* SUBTITLE */
+    .opus-home .subtitle {
+        font-size: 20px;
+        color: #475569;
+        max-width: 1400px;
+        margin: 0 auto 70px;
+        line-height: 1.9;
+    }
+
+    /* ===== MODULE GRID ===== */
+    .modules-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 36px;
+        width: 100%;
+        max-width: none;
+        margin: 0 auto 90px;
+        padding: 0 4vw;
+    }
+
+    /* MODULE CARD */
+    .module-card {
+        background: #f8fafc;
+        padding: 34px;
+        border-radius: 20px;
+        text-align: left;
+        box-shadow: 0 18px 45px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+        min-height: 230px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .module-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 28px 60px rgba(0,0,0,0.15);
+    }
+
+    /* CARD TITLE */
+    .module-card h3 {
+        font-size: 22px;
+        margin-bottom: 14px;
+        color: #111827;
+        font-weight: 700;
+    }
+
+    /* CARD TEXT */
+    .module-card p {
+        font-size: 17px;
+        color: #475569;
+        line-height: 1.75;
+    }
+
+    /* ===== CTA BUTTON ===== */
+    .cta-btn {
+        padding: 20px 56px;
+        font-size: 18px;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        border: none;
+        border-radius: 999px;
+        cursor: pointer;
+        font-weight: 700;
+        transition: all 0.3s ease;
+        box-shadow: 0 18px 45px rgba(102, 126, 234, 0.45);
+    }
+
+    .cta-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 26px 60px rgba(102, 126, 234, 0.6);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1200px) {
+        .opus-home h1 {
+            font-size: 40px;
+        }
+
+        .modules-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (max-width: 768px) {
+        .opus-home {
+            padding-top: 30px; /* 🔥 tighter on mobile */
+        }
+
+        .opus-home h1 {
+            font-size: 32px;
+        }
+
+        .opus-home .subtitle {
+            font-size: 17px;
+        }
+
+        .modules-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .module-card h3 {
+            font-size: 20px;
+        }
+
+        .module-card p {
+            font-size: 16px;
+        }
+    }
+</style>
+
+<div class="opus-home">
+    <h1>
+        Opus — An AI-Driven Unified Intelligence Platform<br>
+        for Career Management
+    </h1>
+
+    <p class="subtitle">
+        Opus is a comprehensive AI-powered platform designed to guide individuals
+        through informed, ethical, and data-driven career decisions. By integrating
+        machine learning, intelligent analytics, and responsible AI principles,
+        Opus empowers users to confidently plan, evaluate, and manage their career
+        journeys.
+    </p>
+
+    <div class="modules-grid">
+        <div class="module-card">
+            <h3>📊 Career Prediction Module</h3>
+            <p>
+                Predicts suitable career domains by analyzing technical skills,
+                interests, behavioral traits, and academic performance.
+            </p>
+        </div>
+
+        <div class="module-card">
+            <h3>📈 Skill Visualization Module</h3>
+            <p>
+                Visualizes strengths, weaknesses, and skill gaps using interactive
+                charts and intelligent analytics.
+            </p>
+        </div>
+
+        <div class="module-card">
+            <h3>📄 Resume–Job Match Scorer</h3>
+            <p>
+                Evaluates resume relevance against job descriptions to improve
+                employability and alignment.
+            </p>
+        </div>
+
+        <div class="module-card">
+            <h3>🚨 Fake Job Detector</h3>
+            <p>
+                Detects potentially fraudulent job postings using intelligent
+                classification models and pattern analysis.
+            </p>
+        </div>
+
+        <div class="module-card">
+            <h3>🛣️ Career Roadmap Generator</h3>
+            <p>
+                Generates personalized, step-by-step learning and career roadmaps
+                aligned with individual goals and industry demand.
+            </p>
+        </div>
+
+        <div class="module-card">
+            <h3>🤖 AI Assistant Chatbot</h3>
+            <p>
+                Acts as an intelligent career companion for guidance, queries,
+                and ethical decision-making support.
+            </p>
+        </div>
+    </div>
+
+    <a href="{{ url_for('prediction.prediction') }}">
+        <button class="cta-btn">Get Started with Career Prediction</button>
+    </a>
+</div>
+
+{% endblock %}

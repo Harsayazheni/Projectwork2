@@ -1,0 +1,11 @@
+Flask
+python-dotenv
+gunicorn
+
+numpy
+pandas
+scikit-learn
+joblib
+
+nltk
+spacy

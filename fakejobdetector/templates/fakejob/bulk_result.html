@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+/* ===== Page Wrapper ===== */
+.bulk-result-wrapper {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 30px 20px;
+}
+
+/* ===== Heading ===== */
+.bulk-result-wrapper h2 {
+    text-align: center;
+    font-size: 2.2rem;
+    margin-bottom: 25px;
+}
+
+/* ===== Result Box ===== */
+.result-box {
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 18px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+    overflow-x: auto;
+}
+
+/* ===== Table Styling (for pandas HTML table) ===== */
+.result-box table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+}
+
+.result-box th,
+.result-box td {
+    padding: 12px 14px;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.result-box th {
+    background: #f3f6fb;
+    font-weight: 700;
+    color: #111827;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.result-box tr:hover {
+    background: #f9fafb;
+}
+
+/* ===== Back Link ===== */
+.back-link {
+    display: inline-block;
+    margin-top: 25px;
+    font-weight: 600;
+    color: #2563eb;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.back-link:hover {
+    color: #1e40af;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+    .bulk-result-wrapper {
+        padding: 20px 10px;
+    }
+
+    .result-box {
+        padding: 15px;
+    }
+
+    .result-box table {
+        font-size: 0.85rem;
+    }
+}
+</style>
+
+<div class="bulk-result-wrapper">
+
+<h2>📊 Bulk CSV Prediction Results</h2>
+
+<div class="result-box">
+    {{ table | safe }}
+</div>
+
+<a href="{{ url_for('fakejob.index') }}" class="back-link">← Back</a>
+
+</div>
+
+{% endblock %}

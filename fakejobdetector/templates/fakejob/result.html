@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+/* ===== Page Wrapper ===== */
+.result-wrapper {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 30px 20px;
+    text-align: center;
+}
+
+/* ===== Heading ===== */
+.result-wrapper h2 {
+    font-size: 2.2rem;
+    margin-bottom: 30px;
+}
+
+/* ===== Result Card ===== */
+.result-box {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+    margin-bottom: 25px;
+}
+
+.result-box h3 {
+    font-size: 1.6rem;
+    margin-bottom: 15px;
+    color: #2563eb;
+}
+
+.result-box p {
+    font-size: 1rem;
+    margin: 8px 0;
+}
+
+/* ===== Risk Levels ===== */
+.result-box p:nth-child(2) {
+    color: #ef4444;
+}
+
+.result-box p:nth-child(3) {
+    color: #f59e0b;
+}
+
+/* ===== Back Link ===== */
+.back-link {
+    display: inline-block;
+    margin-top: 15px;
+    text-decoration: none;
+    font-weight: 600;
+    color: #2563eb;
+    transition: color 0.2s ease;
+}
+
+.back-link:hover {
+    color: #1e40af;
+}
+</style>
+
+<div class="result-wrapper">
+
+<h2>🔎 Prediction Result</h2>
+
+<div class="result-box">
+    <h3>{{ prediction }}</h3>
+    <p><b>Fraud Probability:</b> {{ probability }}</p>
+    <p><b>Risk Level:</b> {{ risk }}</p>
+</div>
+
+<a href="{{ url_for('fakejob.index') }}" class="back-link">← Check Another Job</a>
+
+</div>
+
+{% endblock %}

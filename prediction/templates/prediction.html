@@ -1,0 +1,239 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+/* ===== Page Wrapper ===== */
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 30px 20px;
+}
+
+/* ===== Headings ===== */
+h2 {
+    text-align: center;
+    font-size: 2.2rem;
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 35px;
+    font-size: 1rem;
+}
+
+/* ===== Form ===== */
+form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px 35px;
+}
+
+/* Make CGPA span full width */
+form .form-group:last-of-type {
+    grid-column: span 2;
+}
+
+/* ===== Form Group ===== */
+.form-group {
+    background: #ffffff;
+    padding: 18px 20px;
+    border-radius: 14px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+}
+
+/* ===== Labels ===== */
+label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+/* ===== Value Badge ===== */
+.value-badge {
+    background: #0d6efd;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+}
+
+/* ===== Range Slider ===== */
+input[type="range"] {
+    width: 100%;
+    appearance: none;
+    height: 6px;
+    background: linear-gradient(90deg, #0d6efd, #5a9bff);
+    border-radius: 10px;
+    outline: none;
+    cursor: pointer;
+}
+
+/* Slider Thumb */
+input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
+    height: 18px;
+    width: 18px;
+    background: #ffffff;
+    border: 3px solid #0d6efd;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+input[type="range"]::-moz-range-thumb {
+    height: 18px;
+    width: 18px;
+    background: #ffffff;
+    border: 3px solid #0d6efd;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* ===== Scale ===== */
+.scale {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: #777;
+    margin-top: 6px;
+}
+
+/* ===== Buttons ===== */
+.primary-btn {
+    grid-column: span 2;
+    padding: 14px;
+    font-size: 1rem;
+    border-radius: 30px;
+    border: none;
+    background: linear-gradient(135deg, #0d6efd, #4a8dff);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.primary-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(13, 110, 253, 0.3);
+}
+
+.secondary-btn {
+    padding: 10px 20px;
+    border-radius: 25px;
+    border: 2px solid #0d6efd;
+    background: transparent;
+    color: #0d6efd;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+.secondary-btn:hover {
+    background: #0d6efd;
+    color: white;
+}
+
+/* ===== Result Section ===== */
+.result {
+    margin-top: 40px;
+    padding: 30px;
+    background: #f8f9fa;
+    border-radius: 18px;
+    text-align: center;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+}
+
+.result h3 {
+    margin-bottom: 10px;
+}
+
+.career {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #0d6efd;
+    margin-bottom: 10px;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+    form {
+        grid-template-columns: 1fr;
+    }
+
+    .primary-btn {
+        grid-column: span 1;
+    }
+}
+</style>
+
+<div class="container">
+    <h2>🎯 Career Prediction</h2>
+    <p class="subtitle">Rate yourself honestly on a scale of <b>1 to 10</b></p>
+
+    <form method="POST">
+        {% for f in [
+            "Programming_Skill","Logical_Thinking","Math_Statistics",
+            "Analytical_Skills","Problem_Solving","Creativity",
+            "Interest_Design","Communication","Leadership","Teamwork",
+            "Adaptability","Time_Management","Interest_AI","Industry_Awareness"
+        ] %}
+        <div class="form-group">
+            <label>
+                {{ f.replace("_"," ") }}
+                <span class="value-badge" id="{{ f }}_val">5</span>
+            </label>
+
+            <input type="range"
+                   min="1"
+                   max="10"
+                   step="1"
+                   value="5"
+                   name="{{ f }}"
+                   oninput="document.getElementById('{{ f }}_val').innerText=this.value">
+
+            <div class="scale">
+                <span>1</span><span>10</span>
+            </div>
+        </div>
+        {% endfor %}
+
+        <!-- CGPA -->
+        <div class="form-group">
+            <label>
+                CGPA
+                <span class="value-badge" id="cgpa_val">7.0</span>
+            </label>
+
+            <input type="range"
+                   min="1"
+                   max="10"
+                   step="0.1"
+                   value="7"
+                   name="CGPA"
+                   oninput="document.getElementById('cgpa_val').innerText=this.value">
+
+            <div class="scale">
+                <span>1.0</span><span>10.0</span>
+            </div>
+        </div>
+
+        <button type="submit" class="primary-btn">Predict Career</button>
+    </form>
+
+    {% if prediction %}
+    <div class="result">
+        <h3>🎯 Predicted Career</h3>
+        <p class="career">{{ prediction }}</p>
+        <p>{{ description }}</p>
+
+        <a href="{{ url_for('prediction.visualization') }}">
+            <button class="secondary-btn">View Skill Visualization 📊</button>
+        </a>
+    </div>
+    {% endif %}
+</div>
+
+{% endblock %}

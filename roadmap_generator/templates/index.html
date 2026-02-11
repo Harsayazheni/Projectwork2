@@ -1,0 +1,222 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<style>
+/* ===== Page Wrapper ===== */
+.roadmap-generator-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 30px 20px;
+}
+
+/* ===== Headings ===== */
+.roadmap-generator-wrapper h1 {
+    text-align: center;
+    font-size: 2.4rem;
+    margin-bottom: 25px;
+}
+
+.roadmap-generator-wrapper h3 {
+    margin-top: 20px;
+    margin-bottom: 6px;
+}
+
+/* ===== Form Card ===== */
+.roadmap-generator-form {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+}
+
+/* ===== Labels ===== */
+.roadmap-generator-form label {
+    font-weight: 600;
+    color: #111827;
+}
+
+/* ===== Select ===== */
+.roadmap-generator-form select {
+    width: 100%;
+    padding: 12px;
+    margin-top: 8px;
+    border-radius: 12px;
+    border: 1px solid #d1d5db;
+    background: #f9fafb;
+    font-family: inherit;
+}
+
+.roadmap-generator-form select:focus {
+    outline: none;
+    border-color: #2563eb;
+}
+
+/* ===== Divider ===== */
+.roadmap-generator-form hr {
+    margin: 25px 0;
+    border: none;
+    border-top: 1px solid #e5e7eb;
+}
+
+/* ===== Skills Container ===== */
+#skillsContainer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px 30px;
+    margin-top: 20px;
+}
+
+/* ===== Skill Box ===== */
+.skill-box {
+    background: #f8fafc;
+    padding: 18px;
+    border-radius: 16px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+}
+
+.skill-box label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+/* ===== Range Slider ===== */
+.skill-box input[type="range"] {
+    width: 100%;
+    appearance: none;
+    height: 6px;
+    background: linear-gradient(90deg, #2563eb, #5a8dff);
+    border-radius: 10px;
+    outline: none;
+    cursor: pointer;
+}
+
+.skill-box input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
+    height: 18px;
+    width: 18px;
+    background: #ffffff;
+    border: 3px solid #2563eb;
+    border-radius: 50%;
+}
+
+.skill-box input[type="range"]::-moz-range-thumb {
+    height: 18px;
+    width: 18px;
+    background: #ffffff;
+    border: 3px solid #2563eb;
+    border-radius: 50%;
+}
+
+/* ===== Slider Value ===== */
+.skill-box .value {
+    display: inline-block;
+    margin-top: 8px;
+    font-weight: 600;
+    background: #2563eb;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+}
+
+/* ===== Button ===== */
+.roadmap-generator-form button {
+    width: 100%;
+    margin-top: 30px;
+    padding: 14px;
+    border-radius: 30px;
+    border: none;
+    background: linear-gradient(135deg, #2563eb, #4f83ff);
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.roadmap-generator-form button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(37, 99, 235, 0.35);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+    #skillsContainer {
+        grid-template-columns: 1fr;
+    }
+
+    .roadmap-generator-wrapper h1 {
+        font-size: 2rem;
+    }
+}
+</style>
+
+<div class="roadmap-generator-wrapper">
+
+<h1>📈 Career Roadmap Generator</h1>
+
+<form action="{{ url_for('roadmap.generate') }}" method="post" class="roadmap-generator-form">
+
+    <!-- Career Selection -->
+    <label>Select Career:</label><br>
+    <select name="career" id="careerSelect" required>
+        {% for career in careers %}
+        <option value="{{ career }}">{{ career }}</option>
+        {% endfor %}
+    </select>
+
+    <hr><br>
+
+    <!-- Skill Rating Section -->
+    <h3>Rate Your Skill Level</h3>
+    <p>Scale: <b>1 (Very Low)</b> → <b>10 (Expert)</b></p>
+
+    <div id="skillsContainer"></div>
+
+    <br>
+    <button type="submit">Generate Smart Roadmap</button>
+</form>
+
+</div>
+
+<script>
+    const careerSkills = {{ career_skills | safe }};
+    const careerSelect = document.getElementById("careerSelect");
+    const skillsContainer = document.getElementById("skillsContainer");
+
+    function loadSkills() {
+        skillsContainer.innerHTML = "";
+        const skills = careerSkills[careerSelect.value];
+
+        for (const key in skills) {
+            const label = skills[key];
+
+            const div = document.createElement("div");
+            div.className = "skill-box";
+
+            div.innerHTML = `
+                <label>${label}</label><br>
+                <input type="range" name="skill_${key}" min="1" max="10" value="5">
+                <span class="value">5</span>
+            `;
+
+            const slider = div.querySelector("input");
+            const value = div.querySelector(".value");
+
+            slider.oninput = () => {
+                value.textContent = slider.value;
+            };
+
+            skillsContainer.appendChild(div);
+        }
+    }
+
+    // Initial load
+    loadSkills();
+
+    // Update skills when career changes
+    careerSelect.addEventListener("change", loadSkills);
+</script>
+
+{% endblock %}

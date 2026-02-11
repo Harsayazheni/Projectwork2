@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environments
+venv/
+env/
+.resume_match/venv/
+
+# Environment variables
+.env
+
+# Model files (optional but recommended)
+*.pkl
+
+# OS / editor
+.DS_Store
+.vscode/

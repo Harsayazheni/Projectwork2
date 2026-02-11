@@ -1,0 +1,154 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+/* ===== Page Wrapper ===== */
+.fakejob-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* ===== Headings ===== */
+.fakejob-wrapper h2 {
+    text-align: center;
+    font-size: 2.2rem;
+    margin-bottom: 25px;
+}
+
+.fakejob-wrapper h3 {
+    margin-top: 40px;
+    margin-bottom: 15px;
+}
+
+/* ===== Form ===== */
+.fakejob-form {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 18px;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08);
+}
+
+/* Labels */
+.fakejob-form label {
+    display: block;
+    margin-top: 18px;
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: #111827;
+}
+
+/* Inputs & Textareas */
+.fakejob-form input[type="text"],
+.fakejob-form textarea,
+.fakejob-form input[type="file"] {
+    width: 100%;
+    padding: 12px;
+    border-radius: 12px;
+    border: 1px solid #d1d5db;
+    font-family: inherit;
+    resize: vertical;
+    background: #f9fafb;
+}
+
+.fakejob-form textarea {
+    min-height: 100px;
+}
+
+.fakejob-form input:focus,
+.fakejob-form textarea:focus {
+    outline: none;
+    border-color: #2563eb;
+}
+
+/* ===== Buttons ===== */
+.fakejob-form button {
+    margin-top: 25px;
+    padding: 14px;
+    width: 100%;
+    border-radius: 30px;
+    border: none;
+    background: linear-gradient(135deg, #2563eb, #4f83ff);
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.fakejob-form button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(37, 99, 235, 0.35);
+}
+
+/* ===== Divider ===== */
+hr {
+    margin: 45px 0;
+    border: none;
+    border-top: 1px solid #e5e7eb;
+}
+
+/* ===== Bulk Upload ===== */
+.bulk-upload {
+    background: #f8fafc;
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+}
+
+.bulk-upload button {
+    margin-top: 15px;
+    background: linear-gradient(135deg, #16a34a, #22c55e);
+}
+
+.bulk-upload button:hover {
+    box-shadow: 0 10px 25px rgba(34, 197, 94, 0.35);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+    .fakejob-form {
+        padding: 20px;
+    }
+}
+</style>
+
+<div class="fakejob-wrapper">
+
+<h2>🕵️ Fake Job Detection System</h2>
+
+<form action="{{ url_for('fakejob.predict') }}" method="post" class="fakejob-form">
+
+    <label>Job Title</label>
+    <input type="text" name="title">
+
+    <label>Job Description</label>
+    <textarea name="description"></textarea>
+
+    <label>Company Profile</label>
+    <textarea name="company_profile"></textarea>
+
+    <label>Requirements</label>
+    <textarea name="requirements"></textarea>
+
+    <label>Benefits</label>
+    <textarea name="benefits"></textarea>
+
+    <label>Location</label>
+    <input type="text" name="location">
+
+    <button type="submit">🔍 Predict</button>
+</form>
+
+<hr>
+
+<h3>📄 Bulk CSV Upload</h3>
+
+<form action="{{ url_for('fakejob.bulk') }}" method="post" enctype="multipart/form-data" class="fakejob-form bulk-upload">
+    <input type="file" name="csv_file" required>
+    <button type="submit">⬆ Upload CSV</button>
+</form>
+
+</div>
+
+{% endblock %}

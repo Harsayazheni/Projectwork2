@@ -1,0 +1,253 @@
+/* ----------- Global Reset ----------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ----------- Body ----------- */
+body {
+    background: linear-gradient(135deg, #f4f7fb, #e9eff5);
+    color: #333;
+    padding: 40px;
+}
+
+/* ----------- Main Container ----------- */
+.container {
+    max-width: 900px;
+    margin: auto;
+    background: #ffffff;
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* ----------- Headings ----------- */
+h1, h2, h3 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #1f2937;
+}
+
+h1 {
+    font-size: 32px;
+    font-weight: 700;
+}
+
+h2 {
+    font-size: 22px;
+}
+
+h3 {
+    font-size: 18px;
+    margin-top: 30px;
+}
+
+/* ----------- Form ----------- */
+form {
+    margin-top: 20px;
+}
+
+label {
+    display: block;
+    margin: 12px 0 6px;
+    font-weight: 600;
+}
+
+input[type="text"],
+textarea {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #d1d5db;
+    font-size: 15px;
+    transition: 0.3s;
+}
+
+textarea {
+    min-height: 90px;
+    resize: vertical;
+}
+
+input:focus,
+textarea:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+}
+
+/* ----------- Buttons ----------- */
+button {
+    margin-top: 20px;
+    width: 100%;
+    background: #2563eb;
+    color: #fff;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+button:hover {
+    background: #1e40af;
+    transform: translateY(-1px);
+}
+
+/* ----------- Divider ----------- */
+hr {
+    margin: 40px 0;
+    border: none;
+    height: 1px;
+    background: #e5e7eb;
+}
+
+/* ----------- Result Box ----------- */
+.result-box {
+    text-align: center;
+    padding: 30px;
+    border-radius: 12px;
+    margin-top: 20px;
+}
+
+.result-real {
+    background: #ecfdf5;
+    border: 1px solid #10b981;
+    color: #065f46;
+}
+
+.result-fake {
+    background: #fef2f2;
+    border: 1px solid #ef4444;
+    color: #7f1d1d;
+}
+
+/* ----------- Risk Badge ----------- */
+.risk {
+    margin-top: 15px;
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.risk-low {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.risk-medium {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.risk-high {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+/* ----------- Table (Bulk Results) ----------- */
+table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+th, td {
+    padding: 12px;
+    border-bottom: 1px solid #e5e7eb;
+    text-align: left;
+}
+
+th {
+    background: #f3f4f6;
+    font-weight: 600;
+}
+
+tr:hover {
+    background: #f9fafb;
+}
+
+/* ----------- File Upload ----------- */
+input[type="file"] {
+    margin-top: 10px;
+}
+
+/* ----------- Back Link ----------- */
+a {
+    display: inline-block;
+    margin-top: 20px;
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* ----------- Responsive ----------- */
+@media (max-width: 768px) {
+    body {
+        padding: 20px;
+    }
+
+    .container {
+        padding: 25px;
+    }
+
+    h1 {
+        font-size: 26px;
+    }
+}
+/* Smooth entrance animation */
+.container {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+/* -------- Traffic Light Indicator -------- */
+.traffic-light {
+    margin: 25px auto 10px;
+    width: 80px;
+    padding: 12px 0;
+    background: #111827;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.light {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    opacity: 0.25;
+    box-shadow: inset 0 0 4px rgba(0,0,0,0.6);
+}
+
+/* Colors */
+.light.green { background: #22c55e; }
+.light.yellow { background: #facc15; }
+.light.red { background: #ef4444; }
+
+/* Active light */
+.light.active {
+    opacity: 1;
+    box-shadow: 0 0 12px currentColor;
+}

@@ -1,0 +1,203 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<style>
+/* ===== Page Wrapper ===== */
+.resume-wrapper {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* ===== Layout ===== */
+.resume-layout {
+    display: flex;
+    gap: 40px;
+    margin-top: 30px;
+}
+
+/* ===== Left Panel ===== */
+.left-panel {
+    width: 30%;
+    background: #f3f6fb;
+    padding: 22px;
+    border-radius: 14px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+}
+
+.left-panel h3,
+.left-panel h4 {
+    margin-bottom: 10px;
+}
+
+.left-panel ul,
+.left-panel ol {
+    padding-left: 18px;
+    margin-bottom: 20px;
+}
+
+.left-panel li {
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+    color: #374151;
+}
+
+/* ===== Right Panel ===== */
+.right-panel {
+    width: 70%;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 18px;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08);
+}
+
+.right-panel h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.right-panel p {
+    color: #4b5563;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+/* ===== Form ===== */
+form label {
+    font-weight: 600;
+    color: #111827;
+}
+
+input[type="file"] {
+    padding: 10px;
+    background: #f9fafb;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    width: 100%;
+}
+
+textarea {
+    padding: 12px;
+    border-radius: 12px;
+    border: 1px solid #d1d5db;
+    resize: vertical;
+    font-family: inherit;
+}
+
+textarea:focus,
+input[type="file"]:focus {
+    outline: none;
+    border-color: #2563eb;
+}
+
+/* ===== Button ===== */
+button[type="submit"] {
+    margin-top: 10px;
+    padding: 12px 22px;
+    border-radius: 30px;
+    border: none;
+    background: linear-gradient(135deg, #2563eb, #4f83ff);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+button[type="submit"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(37, 99, 235, 0.35);
+}
+
+/* ===== Result Section ===== */
+hr {
+    margin: 30px 0;
+    border: none;
+    border-top: 1px solid #e5e7eb;
+}
+
+.result-bar {
+    background: #e5e7eb;
+    height: 18px;
+    border-radius: 10px;
+    margin-top: 10px;
+    overflow: hidden;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 900px) {
+    .resume-layout {
+        flex-direction: column;
+    }
+
+    .left-panel,
+    .right-panel {
+        width: 100%;
+    }
+}
+</style>
+
+<div class="resume-wrapper">
+
+<div class="resume-layout" style="display:flex; gap:40px; margin-top:30px;">
+
+  <!-- LEFT PANEL -->
+  <div class="left-panel" style="width:30%; background:#f3f6fb; padding:20px; border-radius:10px;">
+    <h3>About</h3>
+    <ul>
+      <li>Measures how your resume matches a job description</li>
+      <li>Identifies important job keywords</li>
+      <li>Improves your resume based on missing terms</li>
+    </ul>
+
+    <h4>How It Works</h4>
+    <ol>
+      <li>Upload your resume (PDF)</li>
+      <li>Paste the job description</li>
+      <li>Click Analyze Match</li>
+      <li>Review the score</li>
+    </ol>
+  </div>
+
+  <!-- RIGHT PANEL -->
+  <div class="right-panel" style="width:70%;">
+    <h2>📄 Resume Job Match Scorer</h2>
+    <p>
+      Upload your resume (PDF) and paste a job description to see how well they match.
+      <br>
+      <b>Technique used:</b> TF-IDF + Cosine Similarity
+    </p>
+
+    <form method="POST" enctype="multipart/form-data">
+      <label><b>Upload your resume (PDF)</b></label><br><br>
+      <input type="file" name="resume" accept=".pdf" required><br><br>
+
+      <label><b>Paste the job description</b></label><br>
+      <textarea name="job_description" rows="8" style="width:100%;" required></textarea><br><br>
+
+      <button type="submit">Analyze Match</button>
+    </form>
+
+    {% if score is not none %}
+      <hr>
+      <h3>Match Score: {{ score }}%</h3>
+      <p><b>{{ feedback }}</b></p>
+
+      <div class="result-bar" style="background:#e5e7eb; height:18px; border-radius:10px; margin-top:10px;">
+        <div style="
+          width: {{ score }}%;
+          height: 100%;
+          background:
+          {% if score < 40 %} #ef4444
+          {% elif score < 70 %} #f59e0b
+          {% else %} #22c55e {% endif %};
+          border-radius:10px;">
+        </div>
+      </div>
+    {% endif %}
+  </div>
+
+</div>
+
+</div>
+
+{% endblock %}

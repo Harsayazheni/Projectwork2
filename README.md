@@ -1,41 +1,43 @@
-## Title of the Project
-Small description about the project like one below
-The integration of a chatbot within a hostel booking system, aimed at streamlining the reservation process for students and improving the overall user experience.
+## Opus
+Empowering individuals with intelligent, ethical, and data-driven career decision support.
+
 
 ## About
-<!--Detailed Description about the project-->
-Tailored Chatbot for Hostel Booking System is a project designed to integrate a chatbot that leverages advanced natural language processing techniques to understand and respond to user queries to the hostel booking system. Traditional hostel booking processes are often time-consuming and involve manual searches and extensive communication with hostel staff. This project seeks to overcome these challenges by creating an easy-to-use chatbot interface that assists students in addressing inquiries.
+OPUS is a comprehensive AI-powered career intelligence platform designed to guide students and professionals through informed career planning. By integrating machine learning, intelligent analytics, and responsible AI principles, OPUS enables users to confidently evaluate, plan, and manage their career journeys.
 
 ## Features
-<!--List the features of the project as shown below-->
-- Implements advance neural network method.
-- A framework based application for deployment purpose.
-- High scalability.
-- Less time complexity.
-- A specific scope of Chatbot response model, using json data format.
+Implements advanced machine learning and neural network models for career prediction and classification.
+Framework-based web application for scalable deployment.
+Resume–Job matching using NLP and similarity scoring techniques.
+Fake job detection using intelligent pattern recognition and classification models.
+Interactive skill visualization dashboards with analytical insights.
+AI-powered career roadmap generation aligned with industry demand.
+Chatbot response model with structured JSON-based output handling.
+High scalability and optimized performance with reduced time complexity.
 
 ## Requirements
-<!--List the requirements of the project as shown below-->
-* Operating System: Requires a 64-bit OS (Windows 10 or Ubuntu) for compatibility with deep learning frameworks.
-* Development Environment: Python 3.6 or later is necessary for coding the sign language detection system.
-* Deep Learning Frameworks: TensorFlow for model training, MediaPipe for hand gesture recognition.
-* Image Processing Libraries: OpenCV is essential for efficient image processing and real-time hand gesture recognition.
-* Version Control: Implementation of Git for collaborative development and effective code management.
-* IDE: Use of VSCode as the Integrated Development Environment for coding, debugging, and version control integration.
-* Additional Dependencies: Includes scikit-learn, TensorFlow (versions 2.4.1), TensorFlow GPU, OpenCV, and Mediapipe for deep learning tasks.
+Operating System: Requires a 64-bit OS (Windows 10/11 or Ubuntu) for compatibility with ML frameworks.
+Development Environment: Python 3.8 or later for backend development.
+Machine Learning Frameworks: TensorFlow / scikit-learn for model training and prediction tasks.
+Natural Language Processing Libraries: NLTK / spaCy for resume parsing, job analysis, and scam detection.
+Data Processing Libraries: NumPy and Pandas for structured data handling.
+Backend Framework: Flask / FastAPI for deployment and API handling.
+Visualization Libraries: Matplotlib / Plotly for interactive skill analytics.
+Version Control: Git for collaborative development and version management.
+IDE: VSCode for coding, debugging, and integration.
+Additional Dependencies: scikit-learn, TensorFlow, NumPy, Pandas, NLTK/spaCy, and required JSON handling libraries.
 
 ## System Architecture
-<!--Embed the system architecture diagram as shown below-->
+<img width="1039" height="531" alt="image" src="https://github.com/user-attachments/assets/2ed7528a-19aa-4fd0-b5c6-561fd72255f0" />
 
-![Screenshot 2023-11-25 133637](https://github.com/<<yourusername>>/Hand-Gesture-Recognition-System/assets/75235455/a60c11f3-0a11-47fb-ac89-755d5f45c995)
 
 
 ## Output
+#### Home Page
+<img width="1919" height="943" alt="image" src="https://github.com/user-attachments/assets/cb4b81f3-dced-4747-b47c-bd41f0e73c21" />
 
-<!--Embed the Output picture at respective places as shown below as shown below-->
-#### Output1 - Name of the output
+#### Prediction Module
 
-![Screenshot 2023-11-25 134037](https://github.com/<<yourusername>>/Hand-Gesture-Recognition-System/assets/75235455/8c2b6b5c-5ed2-4ec4-b18e-5b6625402c16)
 
 #### Output2 - Name of the output
 ![Screenshot 2023-11-25 134253](https://github.com/<<yourusername>>/Hand-Gesture-Recognition-System/assets/75235455/5e05c981-05ca-4aaa-aea2-d918dcf25cb7)
